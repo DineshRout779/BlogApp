@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <script src="https://kit.fontawesome.com/357dd17236.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <nav>
+        <div class="navbar container">
+            <a href="/dashboard" class="navbar-brand">
+                <h2>NodeApp</h2>
+            </a>
+            <div class="lg-hide">
+                <h2>NodeApp</h2>
+                <ul>
+                    <div class="btn-group">
+                        <li><a href="/auth/logout" class="btn">Logout</a></li>
+                    </div>
+                </ul>
+            </div>
+            <div class="menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <div class="container">
+            <h2>All Posts</h2>
+        </div>
+        <div class="container blog-list">
+            {{!-- cards --}}
+            {{#each blogs}}
+            <a class="blog" href="/viewBlog/{{id}}">
+                <div class="blog-title">
+                    <h3>{{title}}</h3>
+                </div>
+                <div class="blog-body">
+                    <p class="pre-view">{{body}}</p>
+                </div>
+                <div class="blog-author-detailed">
+                    <p>{{author}}</p>
+                </div>
+            </a>
+            {{/each}}
+            {{!-- cards end --}}
+        </div>
+        <div class="hide">
+            <div class="container add">
+                <form action="/addPost" method="POST">
+                    <input type="text" name="title" class="form-control">
+                    <textarea name="body" class="form-control"></textarea>
+                    <input type="submit" value="SUBMIT" class="btn form-control">
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Copyright &copy; <span></span> <a href="#" class='def-a'>Dinesh Rout</a></p>
+    </footer>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>
