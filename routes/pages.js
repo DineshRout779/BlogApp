@@ -75,8 +75,8 @@ router.get("/viewBlog/:id", verifyToken, (req, res) => {
 });
 
 // restricted admin route
-router.get("/admin", (req, res) => {
-  res.render("adminLogin", { title: "Verify" });
-});
+// router.get("/admin", (req, res) => {
+//   res.render("adminLogin", { title: "Verify" });
+// });
 
 module.exports = router;
