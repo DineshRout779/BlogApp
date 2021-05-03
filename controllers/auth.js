@@ -20,6 +20,7 @@ exports.login = async (req, res) => {
 
     db.query(statement, [email], (err, results) => {
       console.log(results.length);
+      console.log(results);
       if (err) {
         console.log(err);
       }
@@ -40,6 +41,8 @@ exports.login = async (req, res) => {
       if (result) {
         // account found
         const id = results[0].id;
+        console.log("here is it too");
+        console.log(id);
         // generating token
         const token = jwt.sign({ id }, process.env.JWT_SECRET, {
           expiresIn: process.env.JWT_EXPIRES_IN,
@@ -75,7 +78,6 @@ exports.register = (req, res) => {
       if (error) {
         console.log(error);
       }
-
       if (results.length > 0) {
         return res.render("register", {
           message: "That email has already been use!",
@@ -86,17 +88,17 @@ exports.register = (req, res) => {
         });
       }
 
-      let hashedPassword = await bcrypt.hash(password, 8, (err, hash) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(hash);
-        }
-      });
+      // Generate Salt
+      const salt = bcrypt.genSaltSync(10);
+
+      // Hash Password
+      const hash = bcrypt.hashSync(password, salt);
+
+      console.log(`hash is ${hash}`);
 
       db.query(
         "INSERT INTO users SET ?",
-        { name: name, email: email, password: hashedPassword },
+        { name: name, email: email, password: hash },
         (error, results) => {
           if (error) {
             console.log(error);

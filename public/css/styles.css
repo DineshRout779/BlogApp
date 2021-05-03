@@ -31,10 +31,6 @@ a {
   display: inline-block;
 }
 
-a:active {
-  color: chartreuse;
-}
-
 img {
   width: 100%;
   display: block;
@@ -54,7 +50,7 @@ p {
 .wrapper {
   width: 90%;
   height: 100%;
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -139,6 +135,10 @@ main {
   border-radius: 6px;
 }
 
+.form h2 {
+  margin-bottom: 0.6em;
+}
+
 .form-control {
   font-size: 1em;
   display: block;
@@ -164,8 +164,8 @@ footer {
 }
 
 .blog {
-  box-shadow: 0 0 20px 0 #f0eaea;
-  padding: 0.5em 1em;
+  box-shadow: 0 0 20px 0 #f5f1f1;
+  padding: 1em;
   margin: 1em 0;
   border-radius: 4px;
 }
@@ -251,6 +251,26 @@ footer {
   margin: 2em 0;
 }
 
+.add-btn {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  background: rgb(48, 41, 41);
+  color: #fff;
+  font-size: 1.3em;
+  font-weight: bold;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  border: 2px solid rgb(48, 41, 41);
+  box-shadow: 0 0 10px 0 rgb(197, 194, 194);
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  box-shadow: 0 0 10px 0 rgb(141, 137, 137);
+}
 /* utility */
 
 .text-center {
