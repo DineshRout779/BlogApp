@@ -19,6 +19,7 @@
                 <h2>NodeApp</h2>
                 <ul>
                     <div class="btn-group">
+                        <li><a href="/" class="btn">New Post</a></li>
                         <li><a href="/auth/logout" class="btn">Logout</a></li>
                     </div>
                 </ul>
@@ -31,8 +32,9 @@
         </div>
     </nav>
     <main>
-        <div class="container">
+        <div class="container blog-container-header">
             <h2>All Posts</h2>
+            <a href="/" class="btn def-a">New Post</a>
         </div>
         <div class="container blog-list">
             {{!-- cards --}}
@@ -51,18 +53,7 @@
             {{/each}}
             {{!-- cards end --}}
         </div>
-        <div class="hide">
-            <div class="container add">
-                <form action="/addPost" method="POST">
-                    <input type="text" name="title" class="form-control">
-                    <textarea name="body" class="form-control"></textarea>
-                    <input type="submit" value="SUBMIT" class="btn form-control">
-                </form>
-            </div>
-            <div class="add-btn">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-            </div>
-        </div>
+
     </main>
     <footer>
         <p>Copyright &copy; <span></span> <a href="#" class='def-a'>Dinesh Rout</a></p>
