@@ -41,6 +41,13 @@ p {
   color: #555;
 }
 
+img {
+  margin: 1em 0;
+  display: block;
+  width: 100%;
+  max-width: 300px;
+}
+
 .container {
   width: 90%;
   max-width: 1080px;
@@ -50,7 +57,6 @@ p {
 .wrapper {
   width: 90%;
   height: 100%;
-  min-height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,62 +69,44 @@ nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  padding: 1em 0;
 }
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1em 0;
 }
 
-.navbar-brand h2 {
+.logo h2 {
   margin: 0;
 }
 
-ul {
+.nav-links {
   display: flex;
 }
 
-ul li a {
-  margin-left: 1em;
-  color: #bba4a4;
+.nav-link {
+  padding: 0.1em 1em;
+  font-size: 14px;
+  border: 1px solid #efe6e6;
+  border-radius: 3px;
+  font-weight: bold;
 }
 
-ul li a:hover {
-  color: #ffffff;
-}
-
-.lg-hide h2 {
-  display: none;
-}
-
-.btn-group {
-  display: flex;
-}
-
-/* hamburger */
-.menu {
-  width: 33px;
-  height: 30px;
-  display: none;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: column;
-  cursor: pointer;
-}
-
-.bar {
-  width: 100%;
-  height: 3px;
+.login {
   background-color: #fff;
-  /* margin: 4px 0; */
-  border-radius: 1px;
+  color: #302929;
+  margin-right: 1em;
+}
+
+.login:hover {
+  opacity: 0.9;
 }
 
 main {
   padding: 0.5em 0;
-  min-height: 80vh;
+  min-height: 75vh;
 }
 
 .text-center h1 {
@@ -330,54 +318,13 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .menu {
-    display: flex;
-  }
-  .lg-hide {
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 200px;
-    height: 100vh;
-    background-color: rgb(48, 41, 41);
-    transition: left 0.3s ease-in;
-    padding: 1em 0;
+  .text-center h1 {
+    font-size: 2.5em;
   }
 
-  .sm-show {
-    left: 0;
+  img {
+    max-width: 150px;
   }
-
-  ul {
-    margin-top: 2em;
-    height: 100%;
-    flex-direction: column;
-    padding: 1em;
-  }
-
-  ul li a {
-    display: block;
-    margin-left: 0;
-    padding: 0.5em 0;
-  }
-
-  ul li .btn:hover {
-    color: #3d3636;
-  }
-
-  ul li .btn-rev:hover {
-    color: #ece3e3;
-  }
-
-  ul li a:hover:not(.btn) {
-    background-color: rgb(56, 50, 50);
-  }
-
-  .btn-group {
-    flex-direction: column;
-    margin: 1em 0;
-  }
-
   .btn {
     width: 100%;
     padding: 0.5em;
@@ -395,15 +342,16 @@ footer {
     color: #fff;
     border: 1px solid #fff;
   }
-
-  .lg-hide h2 {
-    display: block;
-    padding: 0 0.7em;
-    margin: 0;
+  .btn-show {
+    padding: 0.3em;
   }
 
   .btn-show-group {
     flex-direction: column;
+    width: 100%;
+    max-width: 768px;
+    display: flex;
+    margin-top: 1em;
   }
 
   .btn-show + .btn-show {
