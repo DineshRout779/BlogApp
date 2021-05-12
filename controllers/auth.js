@@ -41,7 +41,6 @@ exports.login = async (req, res) => {
       if (result) {
         // account found
         const id = results[0].id;
-        console.log("here is it too");
         console.log(id);
         // generating token
         const token = jwt.sign({ id }, process.env.JWT_SECRET, {
