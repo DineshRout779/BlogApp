@@ -43,7 +43,7 @@ exports.login = async (req, res) => {
         const id = results[0].id;
         console.log(id);
         // generating token
-        const token = jwt.sign({ id }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ id }, "secret", {
           expiresIn: 60 * 60,
         });
         console.log(`token is ${token}`);
