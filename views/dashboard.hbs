@@ -1,64 +1,52 @@
-<!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{title}}</title>
-    <script src="https://kit.fontawesome.com/357dd17236.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
+    <script
+      src="https://kit.fontawesome.com/357dd17236.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
 
-<body>
+  <body>
     <nav>
-        <div class="navbar container">
-            <a href="/dashboard" class="navbar-brand">
-                <h2>NodeApp</h2>
-            </a>
-            <div class="lg-hide">
-                <h2>NodeApp</h2>
-                <ul>
-                    <div class="btn-group">
-                        <li><a href="/" class="btn">New Post</a></li>
-                        <li><a href="/auth/logout" class="btn">Logout</a></li>
-                    </div>
-                </ul>
-            </div>
-            <div class="menu">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-        </div>
+      <div class="navbar container">
+        <a href="/dashboard" class="logo">
+          <h2>NodeApp</h2>
+        </a>
+        <ul class="nav-links">
+          <li><a href="/auth/logout" class="nav-link">Logout</a></li>
+        </ul>
+      </div>
     </nav>
     <main>
-        <div class="container blog-container-header">
-            <h2>All Posts</h2>
-            <a href="/" class="btn def-a">New Post</a>
-        </div>
-        <div class="container blog-list">
-            {{!-- cards --}}
-            {{#each blogs}}
-            <a class="blog" href="/viewBlog/{{id}}">
-                <div class="blog-title">
-                    <h3>{{title}}</h3>
-                </div>
-                <div class="blog-body">
-                    <p class="pre-view">{{body}}</p>
-                </div>
-                <div class="blog-author-detailed">
-                    <p>{{author}}</p>
-                </div>
-            </a>
-            {{/each}}
-            {{!-- cards end --}}
-        </div>
+      <div class="container blog-container-header">
+        <h2>All Posts</h2>
+        <a href="/" class="btn def-a">New Post</a>
+      </div>
+      <div class="container blog-list">
+        {{! cards }}
+        {{#each blogs}}
+          <a class="blog" href="/viewBlog/{{id}}">
+            <div class="blog-title">
+              <h3>{{title}}</h3>
+            </div>
+            <div class="blog-body">
+              <p class="pre-view">{{body}}</p>
+            </div>
+            <div class="blog-author-detailed">
+              <p>{{author}}</p>
+            </div>
+          </a>
+        {{/each}}
+        {{! cards end }}
+      </div>
 
     </main>
-    <footer>
-        <p>Copyright &copy; <span></span> <a href="#" class='def-a'>Dinesh Rout</a></p>
-    </footer>
     <script src="/js/script.js"></script>
-</body>
+  </body>
 
 </html>
