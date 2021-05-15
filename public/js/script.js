@@ -8,6 +8,4 @@ for (let i = 0; i < preView.length; i++) {
   preView[i].textContent = preView[i].textContent.slice(0, maxLen) + "...";
 }
 
-closeAlert.addEventListener("click", () => {
-  alert.style.display = "none";
-});
+closeAlert.addEventListener("click", () => (alert.style.display = "none"));
