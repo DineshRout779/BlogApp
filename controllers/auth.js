@@ -19,7 +19,6 @@ exports.login = async (req, res) => {
     const statement = "SELECT * FROM users where email = ?";
 
     db.query(statement, [email], (err, results) => {
-      console.log(results.length);
       console.log(results);
       if (err) {
         console.log(err);
@@ -29,6 +28,7 @@ exports.login = async (req, res) => {
         res.render("login", { message: "Account does not exists" });
       } else {
         let hash = results[0].password;
+
         // check entered pw with pw in stored in db
         bcrypt.compare(password, hash, function (err, result) {
           // execute code to test for access and login
@@ -109,6 +109,21 @@ exports.register = (req, res) => {
           }
         }
       );
+    }
+  );
+};
+
+exports.addPost = (req, res) => {
+  const { title, body, author } = req.body;
+  db.query(
+    "INSERT INTO posts set ?",
+    { title, body, author },
+    (error, results) => {
+      if (error) {
+        console.log(error);
+      } else {
+        res.redirect("/dashboard");
+      }
     }
   );
 };
