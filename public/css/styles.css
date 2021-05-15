@@ -33,19 +33,14 @@ a {
 
 img {
   width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
   display: block;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 p {
   color: #555;
-}
-
-img {
-  margin: 1em 0;
-  display: block;
-  width: 100%;
-  max-width: 300px;
 }
 
 .container {
@@ -106,11 +101,22 @@ nav {
 
 main {
   padding: 0.5em 0;
-  min-height: 75vh;
 }
 
-.text-center h1 {
+.bg-text {
+  margin: 0 0 0.2em 0;
   font-size: 3em;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  justify-content: center;
+  align-items: center;
+}
+
+.col + .col {
+  margin-left: 2em;
 }
 
 /* form styles */
@@ -137,6 +143,10 @@ main {
   border: 1px solid rgb(219, 205, 205);
 }
 
+textarea {
+  resize: vertical;
+}
+
 .checkbox {
   border: none;
   padding: 0.5em 0;
@@ -152,6 +162,7 @@ footer {
 }
 
 .blog {
+  width: 100%;
   box-shadow: 0 0 20px 0 #f5f1f1;
   padding: 1em;
   margin: 1em 0;
@@ -230,25 +241,30 @@ footer {
   margin: 0;
 }
 
-.row {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-}
-
-.col {
-  margin: 2em 0;
-}
-
 .blog-container-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+.blog-container-header .nav-link {
+  border: 1px solid #333;
+  color: #333;
+}
+
 /* utility */
 
 .text-center {
   text-align: center;
+}
+
+.btn {
+  width: 100%;
+  padding: 0.5em;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 4px;
 }
 
 .btn-submit {
@@ -280,7 +296,7 @@ footer {
 
 .btn-show-group {
   width: 100%;
-  max-width: 768px;
+  max-width: 300px;
   display: flex;
   margin-top: 3em;
 }
@@ -313,13 +329,34 @@ footer {
 
 @media (max-width: 960px) {
   .row {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+  }
+  .bg-text {
+    font-size: 2.5em;
+    text-align: center;
+  }
+
+  .image {
+    order: -1;
+  }
+
+  .col + .col {
+    margin-left: 0;
+  }
+
+  .col p {
+    text-align: center;
+  }
+
+  .btn-show-group {
+    margin: 2em auto;
   }
 }
 
 @media (max-width: 768px) {
-  .text-center h1 {
+  .bg-text {
     font-size: 2.5em;
+    text-align: center;
   }
 
   img {
@@ -335,6 +372,10 @@ footer {
     margin: 0.5em 0;
     border-radius: 4px;
     font-weight: bold;
+  }
+
+  .btn:hover {
+    opacity: 0.9;
   }
 
   .btn-rev {
