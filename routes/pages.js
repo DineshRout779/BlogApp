@@ -39,7 +39,7 @@ router.get("/login", (req, res) => {
 });
 
 router.get("/register", (req, res) => {
-  res.render("register");
+  res.render("register", { title: "Login | NodeApp" });
 });
 
 router.get("/dashboard", verifyToken, (req, res) => {
@@ -72,6 +72,15 @@ router.get("/viewBlog/:id", verifyToken, (req, res) => {
     const blogs = [...results];
     res.render("viewBlog", { title: "Blog | NodeApp", blogs });
   });
+});
+
+router.get("/addPost", verifyToken, (req, res) => {
+  res.header(
+    "Cache-Control",
+    "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+  );
+
+  res.render("addPost", { title: "Add Post | NodeApp" });
 });
 
 // restricted admin route
