@@ -41,12 +41,10 @@ exports.login = async (req, res) => {
       if (result) {
         // account found
         const id = results[0].id;
-        console.log(id);
         // generating token
         const token = jwt.sign({ id }, "secret", {
           expiresIn: 60 * 60,
         });
-        console.log(`token is ${token}`);
         const cookieOptions = {
           expires: new Date(
             Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60
@@ -55,7 +53,7 @@ exports.login = async (req, res) => {
         };
 
         res.cookie("jwt", token, cookieOptions);
-        return res.status(200).redirect("/dashboard");
+        return res.status(200).redirect(`/dashboard/${id}`);
       } else {
         // access denied
         res.render("login", { message: "Incorrect email or password" });
@@ -109,21 +107,6 @@ exports.register = (req, res) => {
           }
         }
       );
-    }
-  );
-};
-
-exports.addPost = (req, res) => {
-  const { title, body, author } = req.body;
-  db.query(
-    "INSERT INTO posts set ?",
-    { title, body, author },
-    (error, results) => {
-      if (error) {
-        console.log(error);
-      } else {
-        res.redirect("/dashboard");
-      }
     }
   );
 };
