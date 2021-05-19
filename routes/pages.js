@@ -35,7 +35,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  res.render("login", { title: "Login | NodeApp" });
+  res.render("login", { title: "Login | BlogApp" });
 });
 
 router.get("/register", (req, res) => {
@@ -69,7 +69,7 @@ router.get("/dashboard/:id", verifyToken, (req, res) => {
             console.log(error);
           }
           res.render("dashboard", {
-            title: "Dashboard | NodeApp",
+            title: "Dashboard | BlogApp",
             blogData,
             userData,
             authorData,
@@ -108,7 +108,7 @@ router.get("/viewBlog/:userId/:blogId", verifyToken, (req, res) => {
               console.log(error);
             }
             res.render("viewBlog", {
-              title: "Blog | NodeApp",
+              title: "Blog | BlogApp",
               blogData,
               userData,
               authorData,
@@ -131,7 +131,7 @@ router.get("/addPost/:id", verifyToken, (req, res) => {
       console.log(error);
     }
     res.render("addPost", {
-      title: "Add Post | NodeApp",
+      title: "Add Post | BlogApp",
       userData,
     });
   });
@@ -173,15 +173,16 @@ router.get("/profile/:id", verifyToken, (req, res) => {
     if (error) {
       console.log(error);
     }
+    const author = userData[0].name;
     db.query(
       "SELECT * FROM posts WHERE author = ?",
-      [id],
+      [author],
       (error, blogData) => {
         if (error) {
           console.log(error);
         }
         res.render("profile", {
-          title: "Profile | NodeApp",
+          title: "Profile | BlogApp",
           userData,
           blogData,
         });
