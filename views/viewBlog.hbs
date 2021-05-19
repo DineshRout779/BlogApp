@@ -4,24 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{title}}</title>
+    <script
+      src="https://kit.fontawesome.com/357dd17236.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
 
   <body>
     <nav>
       <div class="navbar container">
-        <a href="/dashboard" class="logo">
-          <h2>NodeApp</h2>
-        </a>
+        {{#if userData}}
+          {{#each userData}}
+            <a href="/dashboard/{{id}}" class="logo">
+              <h2>NodeApp</h2>
+            </a>
+          {{/each}}
+        {{/if}}
         <ul class="nav-links">
-          <li><a href="/auth/logout" class="nav-link">Logout</a></li>
+          <li><a href="/auth/logout" class="logout"><i
+                class="fa fa-sign-out"
+                aria-hidden="true"
+              ></i></a></li>
+          {{#each userData}}
+            <li><a href="/profile/{{id}}"><i
+                  class="fa fa-user"
+                  aria-hidden="true"
+                ></i></a></li>
+          {{/each}}
         </ul>
       </div>
     </nav>
     <main>
       <div class="container">
         {{! cards }}
-        {{#each blogs}}
+        {{#each blogData}}
           <div>
             <div class="blog-title-detailed">
               <h3>{{title}}</h3>

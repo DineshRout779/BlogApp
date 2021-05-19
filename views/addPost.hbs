@@ -14,11 +14,18 @@
   <body>
     <nav>
       <div class="navbar container">
-        <a href="/dashboard" class="logo">
-          <h2>NodeApp</h2>
-        </a>
+        {{#if userData}}
+          {{#each userData}}
+            <a href="/dashboard/{{id}}" class="logo">
+              <h2>NodeApp</h2>
+            </a>
+          {{/each}}
+        {{/if}}
         <ul class="nav-links">
-          <li><a href="/auth/logout" class="nav-link">Logout</a></li>
+          <li><a href="/auth/logout"><i
+                class="fa fa-sign-out"
+                aria-hidden="true"
+              ></i></a></li>
         </ul>
       </div>
     </nav>
@@ -27,32 +34,27 @@
         <h2>Add a new post:</h2>
       </div>
       <div class="container">
-        <form action="/auth/addPost" method="POST">
-          <input
-            type="text"
-            name="title"
-            class="form-control"
-            placeholder="Title"
-            required
-          />
-          <textarea
-            name="body"
-            id=""
-            cols="30"
-            rows="10"
-            class="form-control"
-            placeholder="Content"
-            required
-          ></textarea>
-          <input
-            type="text"
-            name="author"
-            class="form-control"
-            placeholder="Author"
-            required
-          />
-          <input type="submit" class="btn btn-submit" value="Post" />
-        </form>
+        {{#each userData}}
+          <form action="/addPost/{{id}}" method="POST">
+            <input
+              type="text"
+              name="title"
+              class="form-control"
+              placeholder="Title"
+              required
+            />
+            <textarea
+              name="body"
+              id=""
+              cols="30"
+              rows="10"
+              class="form-control"
+              placeholder="Content"
+              required
+            ></textarea>
+            <input type="submit" class="btn btn-submit" value="Post" />
+          </form>
+        {{/each}}
       </div>
     </main>
     <script src="/js/script.js"></script>
