@@ -17,7 +17,7 @@
         {{#if userData}}
           {{#each userData}}
             <a href="/dashboard/{{id}}" class="logo">
-              <h2>NodeApp</h2>
+              <h2>BlogApp</h2>
             </a>
           {{/each}}
         {{/if}}
@@ -47,15 +47,17 @@
             </div>
           </div>
         </div>
-        <div class="blogs m-1">
+        <div class="blog-list m-1">
           <h3>All Blogs</h3>
           {{#if blogData}}
             {{#each blogData}}
-              <a class="blog" href="/viewBlog/{{id}}">
-                <div class="blog-title">
-                  <h4>{{title}}</h4>
-                </div>
-              </a>
+              {{#each ../userData}}
+                <a class="blog" href="/viewBlog/{{id}}/{{../id}}">
+                  <div class="blog-title">
+                    <h4>{{../title}}</h4>
+                  </div>
+                </a>
+              {{/each}}
             {{/each}}
           {{else}}
             <p>You have not created any blogs</p>
