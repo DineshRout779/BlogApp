@@ -42,22 +42,7 @@ router.get("/register", (req, res) => {
   res.render("register", { title: "Login | NodeApp" });
 });
 
-router.get("/dashboard", verifyToken, (req, res) => {
-  res.header(
-    "Cache-Control",
-    "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
-  );
-
-  db.query("SELECT * FROM posts", (error, results) => {
-    if (error) {
-      console.log(error);
-    }
-    const blogs = [...results];
-    res.render("dashboard", { title: "Dashboard | NodeApp", blogs });
-  });
-});
-
-router.get("/viewBlog/:id", verifyToken, (req, res) => {
+router.get("/dashboard/:id", verifyToken, (req, res) => {
   res.header(
     "Cache-Control",
     "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
@@ -65,22 +50,144 @@ router.get("/viewBlog/:id", verifyToken, (req, res) => {
 
   const { id } = req.params;
 
-  db.query("SELECT * FROM posts WHERE id = ?", [id], (error, results) => {
+  const query1 = "SELECT * FROM posts";
+
+  db.query(query1, (error, blogData) => {
     if (error) {
       console.log(error);
     }
-    const blogs = [...results];
-    res.render("viewBlog", { title: "Blog | NodeApp", blogs });
+    const authorId = blogData[0].author;
+    db.query("SELECT * FROM users WHERE id =?", [id], (error, userData) => {
+      if (error) {
+        console.log(error);
+      }
+      db.query(
+        "SELECT * FROM users WHERE id=?",
+        [authorId],
+        (error, authorData) => {
+          if (error) {
+            console.log(error);
+          }
+          res.render("dashboard", {
+            title: "Dashboard | NodeApp",
+            blogData,
+            userData,
+            authorData,
+          });
+        }
+      );
+    });
   });
 });
 
-router.get("/addPost", verifyToken, (req, res) => {
+router.get("/viewBlog/:userId/:blogId", verifyToken, (req, res) => {
   res.header(
     "Cache-Control",
     "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
   );
 
-  res.render("addPost", { title: "Add Post | NodeApp" });
+  const { userId, blogId } = req.params;
+
+  db.query("SELECT * FROM posts WHERE id = ?", [blogId], (error, blogData) => {
+    if (error) {
+      console.log(error);
+    }
+    const authorId = blogData[0].author;
+    db.query(
+      "SELECT * FROM users WHERE id = ? ",
+      [userId],
+      (error, userData) => {
+        if (error) {
+          console.log(error);
+        }
+        db.query(
+          "SELECT * FROM users WHERE id =?",
+          [authorId],
+          (error, authorData) => {
+            if (error) {
+              console.log(error);
+            }
+            res.render("viewBlog", {
+              title: "Blog | NodeApp",
+              blogData,
+              userData,
+              authorData,
+            });
+          }
+        );
+      }
+    );
+  });
+});
+
+router.get("/addPost/:id", verifyToken, (req, res) => {
+  res.header(
+    "Cache-Control",
+    "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+  );
+  const { id } = req.params;
+  db.query("SELECT * FROM users WHERE id = ?", [id], (error, userData) => {
+    if (error) {
+      console.log(error);
+    }
+    res.render("addPost", {
+      title: "Add Post | NodeApp",
+      userData,
+    });
+  });
+});
+
+router.post("/addPost/:id", verifyToken, (req, res) => {
+  const { title, body } = req.body;
+  const { id } = req.params;
+
+  db.query("SELECT * FROM users WHERE id =?", [id], (error, authorData) => {
+    if (error) {
+      console.log(error);
+    }
+    const authorName = authorData[0].name;
+    db.query(
+      "INSERT INTO posts set ?",
+      { title, body, author: authorName },
+      (error, results) => {
+        if (error) {
+          console.log(error);
+        } else {
+          res.redirect(`/dashboard/${id}`);
+        }
+      }
+    );
+  });
+});
+
+router.get("/profile/:id", verifyToken, (req, res) => {
+  res.header(
+    "Cache-Control",
+    "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+  );
+
+  const { id } = req.params;
+
+  //search profile by id
+  db.query("SELECT * FROM users WHERE id = ?", [id], (error, userData) => {
+    if (error) {
+      console.log(error);
+    }
+    db.query(
+      "SELECT * FROM posts WHERE author = ?",
+      [id],
+      (error, blogData) => {
+        if (error) {
+          console.log(error);
+        }
+        res.render("profile", {
+          title: "Profile | NodeApp",
+          userData,
+          blogData,
+        });
+      }
+    );
+  });
 });
 
 // restricted admin route
