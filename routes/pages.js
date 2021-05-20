@@ -191,6 +191,26 @@ router.get("/profile/:id", verifyToken, (req, res) => {
   });
 });
 
+router.get("/edit/:userId/:blogId", (req, res) => {
+  const { blogId, userId } = req.params;
+
+  db.query("SELECT * FROM posts WHERE id=?", [blogId], (error, blogData) => {
+    if (error) {
+      console.log(error);
+    }
+    db.query("SELECT * FROM users WHERE id=?", [userId], (error, userData) => {
+      if (error) {
+        console.log(error);
+      }
+      res.render("editPost", {
+        title: "Edit post | BlogApp",
+        blogData,
+        userData,
+      });
+    });
+  });
+});
+
 // restricted admin route
 // router.get("/admin", (req, res) => {
 //   res.render("adminLogin", { title: "Verify" });
