@@ -47,16 +47,25 @@
             </div>
           </div>
         </div>
-        <div class="blog-list m-1">
-          <h3>All Blogs</h3>
+        <h3 class="mt-1">All Blogs</h3>
+        <div class="blog-list my-blogs">
+          
           {{#if blogData}}
             {{#each blogData}}
               {{#each ../userData}}
-                <a class="blog" href="/viewBlog/{{id}}/{{../id}}">
+                <div class="blog">
+                  <a class="blog-name" href="/viewBlog/{{id}}/{{../id}}">
                   <div class="blog-title">
                     <h4>{{../title}}</h4>
                   </div>
                 </a>
+                <div class="blog-actions">
+                  <a href="/edit/{{id}}/{{../id}}" class="action-btn edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+</a>
+                  <a href="/delete/{{id}}/{{../id}}" class="action-btn delete"><i class="fa fa-trash-o" aria-hidden="true"></i>
+</a>
+                </div>
+                </div>
               {{/each}}
             {{/each}}
           {{else}}
