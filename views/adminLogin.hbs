@@ -1,33 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{title}}</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css" />
     <style>
-        .wrapper {
-            height: 100vh;
-        }
+      .wrapper { height: 100vh; }
     </style>
-</head>
-<div class="container wrapper">
+  </head>
+  <div class="container wrapper">
     <div class="form">
-        <div class="text-center">
-            <h2>Admin</h2>
-        </div>
-        <form action="/auth/admin" method="POST">
-            <input type="text" name="username" class="form-control" placeholder="Enter username" required>
-            <input type="password" name="password" class="form-control" placeholder="Enter password" required>
-            <input type="password" name="keyword" class="form-control" placeholder="Enter keyword" required>
-            <input type="submit" class="btn btn-submit form-control" value="LOGIN">
-        </form>
+      <div class="text-center">
+        <h2>Admin</h2>
+      </div>
+      <form action="/auth/admin" method="POST">
+        <input
+          type="text"
+          name="username"
+          class="form-control"
+          placeholder="Enter username"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          placeholder="Enter password"
+          required
+        />
+        <input
+          type="password"
+          name="keyword"
+          class="form-control"
+          placeholder="Enter keyword"
+          required
+        />
+        <input
+          type="submit"
+          class="btn btn-submit form-control"
+          value="LOGIN"
+        />
+      </form>
     </div>
-</div>
+  </div>
 
-<body>
+  <body>
 
-</body>
+  </body>
 
 </html>
