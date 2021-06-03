@@ -20,7 +20,7 @@ h1,
 h2,
 h3,
 h4 {
-  margin: 0.6em 0 0.5em 0;
+  margin: 0.5em 0;
   line-height: 1.2;
 }
 
@@ -39,7 +39,7 @@ img {
 }
 
 p {
-  color: #555;
+  color: #333;
   margin-bottom: 0.5em;
 }
 
@@ -60,6 +60,7 @@ ol li {
 .wrapper {
   width: 90%;
   height: 100%;
+  min-height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -296,11 +297,13 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: column;
 }
 
 .my-blogs .blog {
   width: 100%;
   padding: 0;
+  margin: 0.5em 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -375,8 +378,15 @@ footer {
 }
 
 .mt-1 {
-  margin-top: 2em;
-  margin-bottom: 0;
+  margin: 1em 0;
+}
+
+.code {
+  font-family: monospace;
+  background-color: rgb(247, 243, 243);
+  padding: 1em;
+  margin: 1em 0;
+  border-radius: 4px;
 }
 
 /* utility */
