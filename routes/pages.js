@@ -137,11 +137,11 @@ router.get("/addPost/:id", verifyToken, (req, res) => {
   });
 });
 
-router.post("/addPost/:id", verifyToken, (req, res) => {
+router.post("/addPost/:userId", verifyToken, (req, res) => {
   const { title, body } = req.body;
-  const { id } = req.params;
+  const { userId } = req.params;
 
-  db.query("SELECT * FROM users WHERE id =?", [id], (error, authorData) => {
+  db.query("SELECT * FROM users WHERE id =?", [userId], (error, authorData) => {
     if (error) {
       console.log(error);
     }
@@ -153,7 +153,7 @@ router.post("/addPost/:id", verifyToken, (req, res) => {
         if (error) {
           console.log(error);
         } else {
-          res.redirect(`/dashboard/${id}`);
+          res.redirect(`/dashboard/${userId}`);
         }
       }
     );
@@ -196,11 +196,11 @@ router.get("/edit/:userId/:blogId", (req, res) => {
 
   db.query("SELECT * FROM posts WHERE id=?", [blogId], (error, blogData) => {
     if (error) {
-      console.log(error);
+      return console.log(error);
     }
     db.query("SELECT * FROM users WHERE id=?", [userId], (error, userData) => {
       if (error) {
-        console.log(error);
+        return console.log(error);
       }
       res.render("editPost", {
         title: "Edit post | BlogApp",
@@ -209,6 +209,23 @@ router.get("/edit/:userId/:blogId", (req, res) => {
       });
     });
   });
+});
+
+router.post("/edit/:userId/:blogId", verifyToken, (req, res) => {
+  const { title, body } = req.body;
+  const { userId, blogId } = req.params;
+
+  db.query(
+    "UPDATE posts SET title= ? , body= ? WHERE id= ?",
+    [title, body, blogId],
+    (error, results) => {
+      if (error) {
+        return console.log(error);
+      }
+      console.log("Post updated!");
+      res.redirect(`/dashboard/${userId}`);
+    }
+  );
 });
 
 // restricted admin route
