@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
 
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{title}}</title>
+    <script
+      src="https://cdn.tiny.cloud/1/8hcu7qv70zqqjjkeslo9nqphltez2zp2m6xain8ea0zperqp/tinymce/5/tinymce.min.js"
+      referrerpolicy="origin"
+    ></script>
     <script
       src="https://kit.fontawesome.com/357dd17236.js"
       crossorigin="anonymous"
@@ -32,33 +35,38 @@
     </nav>
     <main>
       <div class="container">
-        <h2>Add a new post:</h2>
+        <h2>Edit post:</h2>
       </div>
       <div class="container">
         {{#each blogData}}
-          <form action="/editPost/{{id}}" method="POST">
+          {{#each ../userData}}
+          <form action="/edit/{{id}}/{{../id}}" method="POST">
             <input
               required
               type="text"
               name="title"
+              value={{{../title}}}
               class="form-control"
-              placeholder="Edit title"
             />
             <textarea
               required
               name="body"
-              id=""
+              id="mytextarea"
               cols="30"
-              rows="10"
+              rows="25"
               class="form-control"
-              placeholder={{{body}}}
+              value={{{../body}}}   
             ></textarea>
             <input type="submit" class="btn btn-submit" value="Post" />
           </form>
+          {{/each}}
         {{/each}}
       </div>
     </main>
     <script src="/js/script.js"></script>
+    <script>
+      tinymce.init({ selector: "#mytextarea" });
+    </script>
   </body>
 
 </html>
