@@ -160,16 +160,28 @@ router.post("/addPost/:userId", verifyToken, (req, res) => {
   });
 });
 
-router.get("/profile/:id", verifyToken, (req, res) => {
+router.get("/delete/:userId/:blogId", verifyToken, (req, res) => {
+  const { userId, blogId } = req.params;
+
+  db.query("DELETE FROM posts WHERE id= ?", [blogId], (error, results) => {
+    if (error) {
+      return console.log(error);
+    }
+    console.log("post deleted!");
+    res.redirect(`/dashboard/${userId}`);
+  });
+});
+
+router.get("/profile/:userId", verifyToken, (req, res) => {
   res.header(
     "Cache-Control",
     "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
   );
 
-  const { id } = req.params;
+  const { userId } = req.params;
 
   //search profile by id
-  db.query("SELECT * FROM users WHERE id = ?", [id], (error, userData) => {
+  db.query("SELECT * FROM users WHERE id = ?", [userId], (error, userData) => {
     if (error) {
       console.log(error);
     }
