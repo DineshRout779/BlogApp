@@ -1,7 +1,7 @@
 
 # BlogApp 
 
-A nodejs blog application where user can READ, CREATE, EDIT and DELETE blog posts. Other features include login, logout, unauthorized page restructions. 
+A nodejs blog application where user can READ, CREATE, EDIT and DELETE blog posts. Other features include login, logout, unauthorized page restrictions. 
 
 
 ![enter image description here](https://raw.githubusercontent.com/DineshRout779/BlogApp/main/public/imgs/preview.png)
