@@ -1,84 +1,47 @@
 const express = require("express");
-const mysql = require("mysql");
-const dotenv = require("dotenv");
-const jwt = require("jsonwebtoken");
 const router = express.Router();
+const index = require("../controllers");
+const { verifyToken } = require("../middlewares/verifyToken");
 
-dotenv.config({ path: "./.env" });
+router.get("/", index.index);
+router.get("/login", index.login);
+router.get("/register", index.register);
 
-const db = mysql.createConnection({
-  host: process.env.DATABASE_HOST,
-  user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE,
-});
+// router.get("/dashboard/:id", (req, res) => {
+//   res.header(
+//     "Cache-Control",
+//     "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+//   );
 
-const verifyToken = (req, res, next) => {
-  const token = req.cookies.jwt;
-  // check if token exits
-  if (token) {
-    jwt.verify(token, "secret", (error, decodedToken) => {
-      if (error) {
-        console.log(error);
-        res.redirect("/login");
-      } else {
-        next();
-      }
-    });
-  } else {
-    res.redirect("/login");
-  }
-};
+// const query1 = "SELECT * FROM posts";
 
-router.get("/", (req, res) => {
-  res.render("index");
-});
-
-router.get("/login", (req, res) => {
-  res.render("login", { title: "Login | BlogApp" });
-});
-
-router.get("/register", (req, res) => {
-  res.render("register", { title: "Login | NodeApp" });
-});
-
-router.get("/dashboard/:id", verifyToken, (req, res) => {
-  res.header(
-    "Cache-Control",
-    "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
-  );
-
-  const { id } = req.params;
-
-  const query1 = "SELECT * FROM posts";
-
-  db.query(query1, (error, blogData) => {
-    if (error) {
-      console.log(error);
-    }
-    const authorId = blogData[0].author;
-    db.query("SELECT * FROM users WHERE id =?", [id], (error, userData) => {
-      if (error) {
-        console.log(error);
-      }
-      db.query(
-        "SELECT * FROM users WHERE id=?",
-        [authorId],
-        (error, authorData) => {
-          if (error) {
-            console.log(error);
-          }
-          res.render("dashboard", {
-            title: "Dashboard | BlogApp",
-            blogData,
-            userData,
-            authorData,
-          });
-        }
-      );
-    });
-  });
-});
+// db.query(query1, (error, blogData) => {
+//   if (error) {
+//     console.log(error);
+//   }
+//   const authorId = blogData[0].author;
+//   db.query("SELECT * FROM users WHERE id =?", [id], (error, userData) => {
+//     if (error) {
+//       console.log(error);
+//     }
+//     db.query(
+//       "SELECT * FROM users WHERE id=?",
+//       [authorId],
+//       (error, authorData) => {
+//         if (error) {
+//           console.log(error);
+//         }
+//         res.render("dashboard", {
+//           title: "Dashboard | BlogApp",
+//           blogData,
+//           userData,
+//           authorData,
+//         });
+//       }
+//     );
+//   });
+// });
+// });
 
 router.get("/viewBlog/:userId/:blogId", verifyToken, (req, res) => {
   res.header(
@@ -120,22 +83,7 @@ router.get("/viewBlog/:userId/:blogId", verifyToken, (req, res) => {
   });
 });
 
-router.get("/addPost/:id", verifyToken, (req, res) => {
-  res.header(
-    "Cache-Control",
-    "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
-  );
-  const { id } = req.params;
-  db.query("SELECT * FROM users WHERE id = ?", [id], (error, userData) => {
-    if (error) {
-      console.log(error);
-    }
-    res.render("addPost", {
-      title: "Add Post | BlogApp",
-      userData,
-    });
-  });
-});
+router.get("/addPost/:id", verifyToken);
 
 router.post("/addPost/:userId", verifyToken, (req, res) => {
   const { title, body } = req.body;
