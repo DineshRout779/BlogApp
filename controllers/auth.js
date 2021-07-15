@@ -146,7 +146,7 @@ exports.register = (req, res) => {
               .catch((err) => {
                 console.log(err);
                 res.status(500).render("register", {
-                  message: "Something went wrong!",
+                  message: err,
                 });
               });
           });
@@ -155,50 +155,9 @@ exports.register = (req, res) => {
     })
     .catch((err) => {
       res.status(500).render("register", {
-        message: "Something went wrong!",
+        message: err,
       });
     });
-  // db.query(
-  //   "SELECT email FROM users WHERE email = ? ",
-  //   [email],
-  //   async (error, results) => {
-  //     if (error) {
-  //       console.log(error);
-  //     }
-  //     if (results.length > 0) {
-  //       return res.render("register", {
-  //         message: "That email has already been use!",
-  //       });
-  //     } else if (password !== passwordConfirm) {
-  //       return res.render("register", {
-  //         message: "Passwords do not match!",
-  //       });
-  //     }
-
-  //     // Generate Salt
-  //     const salt = bcrypt.genSaltSync(10);
-
-  //     // Hash Password
-  //     const hash = bcrypt.hashSync(password, salt);
-
-  //     console.log(`hash is ${hash}`);
-
-  //     db.query(
-  //       "INSERT INTO users SET ?",
-  //       { name: name, email: email, password: hash },
-  //       (error, results) => {
-  //         if (error) {
-  //           console.log(error);
-  //         } else {
-  //           return res.render("register", {
-  //             message: "User registered ",
-  //             content: "<a href='/login' class='def-a'>Login</a>",
-  //           });
-  //         }
-  //       }
-  //     );
-  //   }
-  // );
 };
 
 // auth logout
