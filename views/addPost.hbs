@@ -18,33 +18,36 @@
   <body>
     <nav>
       <div class="navbar container">
-        {{#if userData}}
-          {{#each userData}}
-            <a href="/dashboard/{{id}}" class="logo">
-              <h2>BlogApp</h2>
-            </a>
-          {{/each}}
-        {{/if}}
+        <a href="/posts/{{user.id}}" class="logo">
+          <h2>BlogApp</h2>
+        </a>
         <ul class="nav-links">
           <li><a href="/auth/logout"><i
                 class="fa fa-sign-out"
                 aria-hidden="true"
-              ></i></a></li>
+              ></i>Logout</a> 
+          </li>
         </ul>
       </div>
     </nav>
     <main>
       <div class="container">
-        <h2>Add a new post:</h2>
+        <h2>Add a new post</h2>
       </div>
       <div class="container">
-        {{#each userData}}
-          <form action="/addPost/{{id}}" method="POST">
+          <form action="/posts/{{user.id}}" method="POST">
             <input
               type="text"
               name="title"
               class="form-control"
               placeholder="Title"
+              required
+            />
+            <input
+              type="text"
+              name="desc"
+              class="form-control"
+              placeholder="Description"
               required
             />
             <textarea
@@ -57,7 +60,6 @@
             ></textarea>
             <input type="submit" class="btn btn-submit" value="Post" />
           </form>
-        {{/each}}
       </div>
     </main>
     <script src="/js/script.js"></script>

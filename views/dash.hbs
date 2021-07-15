@@ -1,0 +1,78 @@
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{title}}</title>
+    <script
+      src="https://kit.fontawesome.com/357dd17236.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+
+  <body>
+    <nav>
+      <div class="navbar container">
+        {{#if userData}}
+          {{#each userData}}
+            <a href="/dashboard/{{id}}" class="logo">
+              <h2>BlogApp</h2>
+            </a>
+          {{/each}}
+        {{/if}}
+        <ul class="nav-links">
+          <li><a href="/auth/logout" class="logout"><i
+                class="fa fa-sign-out"
+                aria-hidden="true"
+              ></i></a></li>
+          {{#each userData}}
+            <li><a href="/profile/{{id}}"><i
+                  class="fa fa-user"
+                  aria-hidden="true"
+                ></i></a></li>
+          {{/each}}
+        </ul>
+      </div>
+    </nav>
+    <main>
+      <div class="container blog-container-header">
+        <h2>All Posts</h2>
+        {{#each userData}}
+          <a href="/addPost/{{id}}" class="nav-link add">
+            <i class="fa fa-plus" aria-hidden="true"></i>New Post
+          </a>
+        {{/each}}
+      </div>
+      <div class="container blog-list">
+        {{! cards }}
+        {{#if blogData}}
+          {{#each blogData}}
+            {{#each userData}}
+              <a class="blog" href="/viewBlog/{{../id}}">
+                <div class="blog-title">
+                  <h3>{{../title}}</h3>
+                </div>
+                <div class="blog-body">
+                  <p>{{{../body}}}</p>
+                </div>
+                <div class="blog-author-detailed">
+                  <p>{{../author}}</p>
+                </div>
+              </a>
+            {{/each}}
+          {{/each}}
+        {{else}}
+          <p>No Blogs found</p>
+        {{/if}}
+        {{#if err}}
+          {{err}}
+        {{/if}}
+        {{! cards end }}
+      </div>
+
+    </main>
+    <script src="/js/script.js"></script>
+  </body>
+
+</html>

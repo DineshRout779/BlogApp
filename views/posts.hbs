@@ -12,50 +12,44 @@
 <body>
   <nav>
     <div class="navbar container">
-      {{#if userData}}
-          {{#each userData}}
-            <a href="/dashboard/{{id}}" class="logo">
-              <h2>BlogApp</h2>
-            </a>
-          {{/each}}
-        {{/if}}
+      <a href="/posts/{{user.id}}" class="logo">
+        <h2>BlogApp</h2>
+      </a>
       <ul class="nav-links">
-        <li><a href="/auth/logout" class="logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
-        {{#each userData}}
-        <li><a href="/profile/{{id}}"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-        {{/each}}
+        <li><a href="/auth/logout" class="logout">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+        <li><a href="/profile/{{user.id}}">Profile <i class="fa fa-user" aria-hidden="true"></i></a></li>
       </ul>
     </div>
   </nav>
   <main>
     <div class="container blog-container-header">
       <h2>All Posts</h2>
-      {{#each userData}}
-        <a href="/addPost/{{id}}" class="nav-link add">
-          <i class="fa fa-plus" aria-hidden="true"></i>New Post
+        <a href="/posts/add/{{user.id}}" class="nav-link add">
+          New Post <i class="fa fa-plus" aria-hidden="true"></i>
         </a>
-      {{/each}}
     </div>
     <div class="container blog-list">
       {{! cards }}
-      {{#each blogData}}
-        {{#each ../userData}}
-        <a class="blog" href="/viewBlog/{{id}}/{{../id}}">
+      {{#if posts}}
+      {{#each posts}}
+      {{!-- {{#each author}} --}}
+        <a class="blog" href="/viewBlog/{{id}}/{{ ../user.id}}">
         <div class="blog-title">
-          <h3>{{../title}}</h3>
+          <h3>{{title}}</h3>
         </div>
         <div class="blog-body">
-          {{{../body}}}
+          {{{desc}}}
         </div>
         <div class="blog-author-detailed">
-          <p>{{../author}}</p>
+          <p>{{author}}</p>
         </div>
-        {{/each}}
+        </a>
       {{/each}}
-      </a>
+      {{else}}
+      <h4>No Blogs found</h4>
+      {{/if}}
       {{! cards end }}
     </div>
-
   </main>
   <script src="/js/script.js"></script>
 </body>
