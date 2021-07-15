@@ -119,14 +119,14 @@ exports.register = (req, res) => {
           if (err) {
             console.log(err);
             res.status(401).render("register", {
-              message: "err",
+              message: err,
             });
           }
           bcryptjs.hash(password, salt, (err, hash) => {
             if (err) {
               console.log(err);
               res.status(401).render("register", {
-                message: "Something went wrong!",
+                message: err,
               });
             }
 
