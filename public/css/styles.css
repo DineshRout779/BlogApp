@@ -148,7 +148,7 @@ main {
 
 .form {
   width: 95%;
-  max-width: 360px;
+  max-width: 480px;
   padding: 2em;
   box-shadow: 2px 2px 30px 0 #efe6e6;
   border-radius: 6px;
@@ -156,6 +156,8 @@ main {
 
 .form h2 {
   margin-bottom: 0.6em;
+  border-left: 5px solid #4871f7;
+  padding-left: 0.5em;
 }
 
 .form-control {
@@ -165,7 +167,12 @@ main {
   padding: 0.5em;
   margin: 0.4em 0;
   border-radius: 4px;
-  border: 1px solid rgb(219, 205, 205);
+  border: 1px solid #dbcdcd;
+  outline: none;
+}
+
+.form-control:focus {
+  border: 1px solid #4871f7;
 }
 
 textarea {
@@ -225,8 +232,7 @@ footer {
 }
 
 .blog-body {
-  height: 110px;
-  overflow: hidden;
+  color: #555;
 }
 
 .blog-body p {
