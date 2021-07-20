@@ -26,7 +26,7 @@ h4 {
 
 a {
   text-decoration: none;
-  color: rgb(255, 255, 255);
+  color: rgb(44, 41, 41);
   display: inline-block;
 }
 
@@ -92,11 +92,16 @@ nav {
   padding: 0;
 }
 
+nav a {
+  color: #f5f1f1;
+  font-size: 14px;
+  font-weight: bold;
+}
+
 .nav-link {
+  color: #f5f1f1;
   padding: 0.1em 1em;
   font-size: 14px;
-  border: 1px solid #efe6e6;
-  border-radius: 3px;
   font-weight: bold;
 }
 
@@ -306,30 +311,25 @@ footer {
   flex-direction: column;
 }
 
-.my-blogs .blog {
+.profile-blog {
   width: 100%;
-  padding: 0;
-  margin: 0.5em 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0.5em 0;
+  box-shadow: 0 0 10px 0 rgb(235, 231, 231);
 }
 
-.my-blogs .blog:hover {
-  box-shadow: 0 0 20px 0 #eee5e5;
-}
-
-.blog-name {
-  width: 100%;
-  padding: 1em;
-  display: block;
+.profile-blog .blog-title {
+  flex-grow: 1;
+  padding: 0.5em;
 }
 
 .blog-actions {
+  padding: 0.5em;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.8em;
   background-color: #fff;
 }
 
