@@ -3,7 +3,7 @@ const { Post, User } = require("../models");
 exports.findAllData = async (req, res) => {
   try {
     const title = req.query.title;
-    const userId = req.params.id;
+    const { userId } = req.params;
     var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
     await Post.findAll({ where: condition, raw: true })
@@ -13,16 +13,16 @@ exports.findAllData = async (req, res) => {
           raw: true,
         })
           .then((user) => {
-            res.status(200).render("posts", { posts, user });
+            res.render("posts", { posts, user });
           })
           .catch((err) => {
-            res.send(404).json({
+            res.sendStatus(404).json({
               message: err,
             });
           });
       })
       .catch((err) => {
-        res.send(404).json({
+        res.sendStatus(404).json({
           message: err,
         });
       });
@@ -33,28 +33,24 @@ exports.findAllData = async (req, res) => {
 };
 
 exports.addPostPage = async (req, res) => {
-  const { id } = req.params;
+  const { userId } = req.params;
 
-  await User.findOne({ where: { id }, raw: true })
+  await User.findOne({ where: { id: userId }, raw: true })
     .then((user) => {
-      res.status(200).render("addPost", {
+      res.render("addPost", {
         title: "Add Post | BlogApp",
         user,
       });
     })
     .catch((err) => {
       console.log(err);
-      res.status(404).json(err);
+      res.sendStatus(404).json(err);
     });
 };
 
 exports.create = async (req, res) => {
-  res.header(
-    "Cache-Control",
-    "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
-  );
-  const { id } = req.params;
-  const user = await User.findOne({ where: { id } });
+  const { userId } = req.params;
+  const user = await User.findOne({ where: { id: userId } });
   const { title, desc, body } = req.body;
   const post = {
     title,
@@ -64,12 +60,40 @@ exports.create = async (req, res) => {
   };
   await Post.create(post)
     .then(() => {
-      res.redirect(`/posts/${id}`);
+      res.redirect(`/posts/${userId}`);
     })
     .catch((err) => {
       console.log(err);
-      res.status(404).json({
+      res.sendStatus(404).json({
         message: err,
       });
     });
+};
+
+exports.view = async (req, res) => {
+  try {
+    const { blogId, userId } = req.params;
+    await Post.findOne({ where: { id: blogId }, raw: true })
+      .then(async (post) => {
+        await User.findOne({ where: { id: userId }, raw: true })
+          .then((user) => {
+            res.render("viewBlog", {
+              title: "Blog | BlogApp",
+              post,
+              user,
+            });
+          })
+          .catch((e) => {
+            console.log(e);
+            res.sendStatus(e);
+          });
+      })
+      .catch((e) => {
+        console.log(e);
+        res.sendStatus(e);
+      });
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(error);
+  }
 };
