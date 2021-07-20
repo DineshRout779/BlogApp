@@ -55,47 +55,9 @@ exports.login = (req, res) => {
           message: "Something went wrong! Please try again",
         });
       });
-    // const statement = "SELECT * FROM users where email = ?";
-    // db.query(statement, [email], (err, results) => {
-    //   console.log(results);
-    //   if (err) {
-    //     console.log(err);
-    //   }
-    //   // if account doesn't exists
-    //   if (results.length === 0) {
-    //
-    //   } else {
-    //     let hash = results[0].password;
-    //     // check entered pw with pw in stored in db
-    //     bcrypt.compare(password, hash, function (err, result) {
-    //       // execute code to test for access and login
-    //       hasAccess(result, results);
-    //     });
-    //   }
-    // });
-    // const hasAccess = (result, results) => {
-    //   if (result) {
-    //     // account found
-    //     const id = results[0].id;
-    //     // generating token
-    //     const token = jwt.sign({ id }, "secret", {
-    //       expiresIn: 60 * 60 * 24,
-    //     });
-    //     const cookieOptions = {
-    //       expires: new Date(
-    //         Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60
-    //       ),
-    //       httpOnly: true,
-    //     };
-    //     res.cookie("jwt", token, cookieOptions);
-    //     return res.status(200).redirect(`/dashboard/${id}`);
-    //   } else {
-    //     // access denied
-    //     res.render("login", { message: "Incorrect email or password" });
-    //   }
-    // };
   } catch (error) {
     console.log(error);
+    res.sendStatus(error);
   }
 };
 
