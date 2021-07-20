@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 const postRouter = require("./routes/post");
+const userRouter = require("./routes/user");
 const db = require("./models");
 const methodOverride = require("method-override");
 
@@ -36,6 +37,7 @@ db.sequelize
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/posts", postRouter);
+app.use("/profile", userRouter);
 
 const PORT = process.env.PORT || 3000;
 
