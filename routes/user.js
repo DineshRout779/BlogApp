@@ -7,3 +7,5 @@ const { verifyToken } = require("../middlewares/verifyToken");
 router.get("/:userId", verifyToken, user.viewProfile);
 router.put("/:userId", verifyToken, user.updateProfile);
 router.delete("/:userId", verifyToken, user.deleteProfile);
+
+module.exports = router;
