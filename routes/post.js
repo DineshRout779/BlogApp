@@ -4,8 +4,9 @@ const post = require("../controllers/post");
 
 const { verifyToken } = require("../middlewares/verifyToken");
 
-router.get("/:id", verifyToken, post.findAllData);
-router.post("/:id", verifyToken, post.create);
-router.get("/add/:id", verifyToken, post.addPostPage);
+router.get("/:userId", verifyToken, post.findAllData);
+router.post("/:userId", verifyToken, post.create);
+router.get("/add/:userId", verifyToken, post.addPostPage);
+router.get("/:userId/:blogId", verifyToken, post.view);
 
 module.exports = router;
