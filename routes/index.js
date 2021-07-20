@@ -7,42 +7,6 @@ router.get("/", index.index);
 router.get("/login", index.login);
 router.get("/register", index.register);
 
-// router.get("/dashboard/:id", (req, res) => {
-//   res.header(
-//     "Cache-Control",
-//     "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
-//   );
-
-// const query1 = "SELECT * FROM posts";
-
-// db.query(query1, (error, blogData) => {
-//   if (error) {
-//     console.log(error);
-//   }
-//   const authorId = blogData[0].author;
-//   db.query("SELECT * FROM users WHERE id =?", [id], (error, userData) => {
-//     if (error) {
-//       console.log(error);
-//     }
-//     db.query(
-//       "SELECT * FROM users WHERE id=?",
-//       [authorId],
-//       (error, authorData) => {
-//         if (error) {
-//           console.log(error);
-//         }
-//         res.render("dashboard", {
-//           title: "Dashboard | BlogApp",
-//           blogData,
-//           userData,
-//           authorData,
-//         });
-//       }
-//     );
-//   });
-// });
-// });
-
 router.get("/viewBlog/:userId/:blogId", verifyToken, (req, res) => {
   res.header(
     "Cache-Control",
@@ -187,10 +151,5 @@ router.post("/edit/:userId/:blogId", verifyToken, (req, res) => {
     }
   );
 });
-
-// restricted admin route
-// router.get("/admin", (req, res) => {
-//   res.render("adminLogin", { title: "Verify" });
-// });
 
 module.exports = router;
