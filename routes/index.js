@@ -19,37 +19,6 @@ router.get("/delete/:userId/:blogId", verifyToken, (req, res) => {
   });
 });
 
-router.get("/profile/:userId", verifyToken, (req, res) => {
-  res.header(
-    "Cache-Control",
-    "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
-  );
-
-  const { userId } = req.params;
-
-  //search profile by id
-  db.query("SELECT * FROM users WHERE id = ?", [userId], (error, userData) => {
-    if (error) {
-      console.log(error);
-    }
-    const author = userData[0].name;
-    db.query(
-      "SELECT * FROM posts WHERE author = ?",
-      [author],
-      (error, blogData) => {
-        if (error) {
-          console.log(error);
-        }
-        res.render("profile", {
-          title: "Profile | BlogApp",
-          userData,
-          blogData,
-        });
-      }
-    );
-  });
-});
-
 router.get("/edit/:userId/:blogId", (req, res) => {
   const { blogId, userId } = req.params;
 
