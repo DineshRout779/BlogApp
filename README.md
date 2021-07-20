@@ -1,5 +1,7 @@
 # BlogApp 
 
+Its currently under some bug fixes.
+
 A nodejs blog application where user can READ, CREATE, EDIT and DELETE blog posts. Other features include login, logout, unauthorized page restructions. 
 
 
