@@ -1,81 +1,82 @@
-<!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{title}}</title>
-    <script
-      src="https://kit.fontawesome.com/357dd17236.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="/css/styles.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{title}}</title>
+  <script src="https://kit.fontawesome.com/357dd17236.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
 
-  <body>
-    <nav>
-      <div class="navbar container">
-        {{#if userData}}
-          {{#each userData}}
-            <a href="/dashboard/{{id}}" class="logo">
-              <h2>BlogApp</h2>
-            </a>
-          {{/each}}
-        {{/if}}
-        <ul class="nav-links">
-          <li><a href="/auth/logout"><i
-                class="fa fa-sign-out"
-                aria-hidden="true"
-              ></i></a></li>
-        </ul>
-      </div>
-    </nav>
-    <main>
-      <div class="container">
-        <div class="profile-card">
-          <div class="profile-header">
-            <div class="profile-img">
-              <img
-                src="https://i.stack.imgur.com/l60Hf.png"
-                alt="profile-image"
-              />
-            </div>
-            <div class="profile-desc">
-              {{#each userData}}
-                <h3>{{name}}</h3>
-                <p>{{email}}</p>
-              {{/each}}
-            </div>
+<body>
+  <nav>
+    <div class="navbar container">
+      <a href="/posts/{{user.id}}" class="logo">
+        <h2>BlogApp</h2>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/auth/logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+      </ul>
+    </div>
+  </nav>
+  <main>
+    <div class="container">
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="profile-img">
+            <img src="https://i.stack.imgur.com/l60Hf.png" alt="profile-image" />
+          </div>
+          <div class="profile-desc">
+            <h3>{{user.name}}</h3>
+            <p>{{user.email}}</p>
           </div>
         </div>
-        <h3 class="mt-1">All Blogs</h3>
-        <div class="blog-list my-blogs">
-          
-          {{#if blogData}}
-            {{#each blogData}}
-              {{#each ../userData}}
-                <div class="blog">
-                  <a class="blog-name" href="/viewBlog/{{id}}/{{../id}}">
-                  <div class="blog-title">
-                    <h4>{{../title}}</h4>
-                  </div>
-                </a>
-                <div class="blog-actions">
-                  <a href="/edit/{{id}}/{{../id}}" class="action-btn edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-</a>
-                  <a href="/delete/{{id}}/{{../id}}" class="action-btn delete"><i class="fa fa-trash-o" aria-hidden="true"></i>
-</a>
-                </div>
-                </div>
-              {{/each}}
-            {{/each}}
-          {{else}}
-            <p>You have not created any blogs</p>
-          {{/if}}
-        </div>
       </div>
-    </main>
-    <script src="/js/script.js"></script>
-  </body>
+      <h3 class="mt-1">All Blogs</h3>
+      <div class="blog-list my-blogs">
+        {{#if posts}}
+        {{#each posts}}
+        <div class="profile-blog">
+          <a href="/posts/{{../user.id}}/{{id}}" class="blog-title">
+            <h4>{{title}}</h4>
+          </a>
+          <div class="blog-actions">
+            <a href="/edit/{{../user.id}}/{{id}}" class="action-btn edit">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </a>
+            <a href="/delete/{{../user.id}}/{{id}}" class="action-btn delete">
+               <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+        {{/each}}
+        {{else}}
+        <p>You have not created any blogs</p>
+        {{/if}}
+      </div>
+    </div>
+  </main>
+  <script src="/js/script.js"></script>
+</body>
 
 </html>
+
+{{!-- {{#if posts}}
+{{#each posts}}
+<a class="blog" href="/posts/{{user.id}}/{{id}}">
+  <div class="blog-title">
+    <h4>{{title}}</h4>
+  </div>
+  <div class="blog-actions">
+    <a href="/edit/{{id}}/{{user.id}}" class="action-btn edit">
+      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+    </a>
+    <a href="/delete/{{id}}/{{user.id}}" class="action-btn delete">
+      <i class="fa fa-trash-o" aria-hidden="true"></i>
+    </a>
+  </div>
+</a>
+{{/each}}
+{{else}}
+<p>You have not created any blogs</p>
+{{/if}} --}}
