@@ -15,11 +15,18 @@ app.use(
   })
 );
 
-app.use(methodOverride("_method"));
-
 app.use(express.json());
 
 app.use(cookieParser());
+
+app.use(function (req, res, next) {
+  if (req.query._method == "DELETE") {
+    req.method = "DELETE";
+    req.url = req.path;
+  }
+  next();
+});
+app.use(methodOverride("_method"));
 
 app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "views"));
