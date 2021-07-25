@@ -97,3 +97,62 @@ exports.view = async (req, res) => {
     res.sendStatus(error);
   }
 };
+
+exports.updatePostPage = async (req, res) => {
+  const { userId, blogId } = req.params;
+
+  await Post.findOne({ where: { id: blogId }, raw: true })
+    .then((post) => {
+      User.findOne({ where: { id: userId }, raw: true }).then((user) => {
+        res.render("editPost", {
+          post,
+          user,
+        });
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(404).json(err);
+    });
+};
+
+exports.update = async (req, res) => {
+  try {
+    const { blogId, userId } = req.params;
+    const { title, desc, body } = req.body;
+    const post = {
+      title: title,
+      desc: desc,
+      body: body,
+    };
+    await Post.update(post, { where: { id: blogId } })
+      .then((post) => {
+        console.log(post);
+        res.redirect(`/posts/${userId}`);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(error);
+      });
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(error);
+  }
+};
+
+exports.delete = async (req, res) => {
+  try {
+    const { blogId, userId } = req.params;
+
+    await Post.destroy({ where: { id: blogId } })
+      .then(() => {
+        res.redirect(`/posts/${userId}`);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(err);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+};
