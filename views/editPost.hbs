@@ -18,13 +18,9 @@
   <body>
     <nav>
       <div class="navbar container">
-        {{#if userData}}
-          {{#each userData}}
-            <a href="/dashboard/{{id}}" class="logo">
+            <a href="/posts/{{user.id}}" class="logo">
               <h2>BlogApp</h2>
             </a>
-          {{/each}}
-        {{/if}}
         <ul class="nav-links">
           <li><a href="/auth/logout"><i
                 class="fa fa-sign-out"
@@ -38,14 +34,19 @@
         <h2>Edit post:</h2>
       </div>
       <div class="container">
-        {{#each blogData}}
-          {{#each ../userData}}
-          <form action="/edit/{{id}}/{{../id}}" method="POST">
+          <form action="/posts/{{user.id}}/{{post.id}}?_method=PUT" method="POST">
             <input
               required
               type="text"
               name="title"
-              value={{{../title}}}
+              value={{{post.title}}}
+              class="form-control"
+            />
+            <input
+              required
+              type="text"
+              name="desc"
+              value={{{post.desc}}}
               class="form-control"
             />
             <textarea
@@ -55,12 +56,10 @@
               cols="30"
               rows="25"
               class="form-control"
-              value={{{../body}}}   
+              value={{{post.body}}}
             ></textarea>
             <input type="submit" class="btn btn-submit" value="Post" />
           </form>
-          {{/each}}
-        {{/each}}
       </div>
     </main>
     <script src="/js/script.js"></script>

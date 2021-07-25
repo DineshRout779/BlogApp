@@ -15,7 +15,7 @@
         <h2>BlogApp</h2>
       </a>
       <ul class="nav-links">
-        <li><a href="/auth/logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+        <li><a href="/auth/logout">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
       </ul>
     </div>
   </nav>
@@ -41,10 +41,10 @@
             <h4>{{title}}</h4>
           </a>
           <div class="blog-actions">
-            <a href="/edit/{{../user.id}}/{{id}}" class="action-btn edit">
+            <a href="/posts/update/{{../user.id}}/{{id}}" class="action-btn edit">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
             </a>
-            <a href="/delete/{{../user.id}}/{{id}}" class="action-btn delete">
+            <a href="/posts/{{../user.id}}/{{id}}?_method=DELETE" class="action-btn delete">
                <i class="fa fa-trash-o" aria-hidden="true"></i>
             </a>
           </div>
@@ -60,23 +60,3 @@
 </body>
 
 </html>
-
-{{!-- {{#if posts}}
-{{#each posts}}
-<a class="blog" href="/posts/{{user.id}}/{{id}}">
-  <div class="blog-title">
-    <h4>{{title}}</h4>
-  </div>
-  <div class="blog-actions">
-    <a href="/edit/{{id}}/{{user.id}}" class="action-btn edit">
-      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-    </a>
-    <a href="/delete/{{id}}/{{user.id}}" class="action-btn delete">
-      <i class="fa fa-trash-o" aria-hidden="true"></i>
-    </a>
-  </div>
-</a>
-{{/each}}
-{{else}}
-<p>You have not created any blogs</p>
-{{/if}} --}}
