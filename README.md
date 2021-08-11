@@ -1,6 +1,6 @@
 # BlogApp
 
-### [Live App](https://agile-eyrie-30726.herokuapp.com/)
+### [Live App](https://drblog.herokuapp.com/)
 
 ## Sample Credential:
 
